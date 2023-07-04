@@ -1,0 +1,4 @@
+.venv
+flagged
+.env
+__pycache__
