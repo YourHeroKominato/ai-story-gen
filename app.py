@@ -1,5 +1,3 @@
-from dotenv import load_dotenv
-import os
 import json
 
 import gradio as gr
@@ -80,9 +78,6 @@ def create_kishotenketsu(template, story_idea, story_style, art_style):
 
     return storyboard, ki, sho, ten, ketsu, ki_dialogue, sho_dialogue, ten_dialogue, ketsu_dialogue, ki_image_prompt, sho_image_prompt, ten_image_prompt, ketsu_image_prompt, ki_image, sho_image, ten_image, ketsu_image
 
-
-load_dotenv()
-default_openai_api_key = os.environ.get('OPENAI_API_KEY')
 
 default_template = """
 role:
@@ -180,7 +175,6 @@ with gr.Blocks() as demo:
             label="Paste your OpenAI API key (sk-...) here",
             lines=1,
             type="password",
-            value=default_openai_api_key,
             interactive=True,
         )
         model_name = gr.Radio(["gpt-4", "gpt-3.5-turbo-16k"], value="gpt-4", label="model", interactive=True)
