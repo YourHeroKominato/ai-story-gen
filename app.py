@@ -164,7 +164,9 @@ json-sample:
 ///
 """
 
-
+def auth(openai_api_key, model_name):
+    llm = OpenAI(openai_api_key=openai_api_key, model_name=model_name)
+    return llm
 
 with gr.Blocks() as demo:
 
@@ -176,10 +178,16 @@ with gr.Blocks() as demo:
             lines=1,
             type="password",
             interactive=True,
+            placeholder="sk-...",
+            value="   "
         )
         model_name = gr.Radio(["gpt-4", "gpt-3.5-turbo-16k"], value="gpt-4", label="model", interactive=True)
+        
+        llm = OpenAI(openai_api_key=openai_api_key.value, model_name=model_name.value)
+        
+        openai_api_key.change(auth, [openai_api_key, model_name])
 
-    llm = OpenAI(openai_api_key=openai_api_key.value, model_name=model_name.value)
+
 
     with gr.Row():
         ############## INPUT
